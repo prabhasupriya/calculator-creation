@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simple Calculator</title>
+  <style>
+    body {
+      background-color:rgb(27, 121, 215);
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .calculator {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    }
+
+    #display {
+      width: 100%;
+      height: 50px;
+      font-size: 24px;
+      margin-bottom: 15px;
+      padding: 10px;
+      text-align: right;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+    }
+
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 60px);
+      grid-gap: 10px;
+    }
+
+    .buttons button {
+      padding: 15px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color:rgb(39, 190, 37);
+      transition: background 0.2s;
+    }
+
+    .buttons button:hover {
+      background-color:rgb(192, 190, 185);
+    }
+
+    .equal {
+      background-color: #4caf50;
+      color: white;
+    }
+
+    .clear {
+      background-color:rgb(73, 54, 244);
+      background-color:rgb(250, 35, 250);
+      color: red;
+    }
+
+    .delete {
+      background-color:rgb(255, 89, 0);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<div class="calculator">
+  <input type="text" id="display" disabled>
+  <div class="buttons">
+    <button onclick="appendValue('7')">7</button>
+    <button onclick="appendValue('8')">8</button>
+    <button onclick="appendValue('9')">9</button>
+    <button onclick="appendValue('/')">÷</button>
+
+    <button onclick="appendValue('4')">4</button>
+    <button onclick="appendValue('5')">5</button>
+    <button onclick="appendValue('6')">6</button>
+    <button onclick="appendValue('*')">×</button>
+
+    <button onclick="appendValue('1')">1</button>
+    <button onclick="appendValue('2')">2</button>
+    <button onclick="appendValue('3')">3</button>
+    <button onclick="appendValue('-')">−</button>
+
+    <button onclick="appendValue('0')">0</button>
+    <button onclick="appendValue('.')">.</button>
+    <button onclick="calculate()" class="equal">=</button>
+    <button onclick="appendValue('+')">+</button>
+
+    <!-- Delete button -->
+    <button onclick="deleteLast()" class="delete">DEL</button>
+    <!-- Clear button (spans 3 columns) -->
+    <button onclick="clearDisplay()" class="clear" style="grid-column: span 3;">C</button>
+  </div>
+</div>
+
+<script>
+  const display = document.getElementById('display');
+
+  // Appends a character (number/operator) to the display
+  function appendValue(value) {
+    display.value += value;
+  }
+
+  // Clears the entire display
+  function clearDisplay() {
+    display.value = '';
+  }
+
+  // Deletes the last character (like backspace)
+  function deleteLast() {
+    display.value = display.value.slice(0, -1);
+  }
+
+  // Evaluates the expression and shows the result
+  function calculate() {
+    try {
+      display.value = eval(display.value);
+    } catch {
+      display.value = "Error";
+    }
+  }
+</script>
+
+</body>
+</html>
